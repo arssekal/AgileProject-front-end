@@ -17,9 +17,10 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { useWhatToShow } from '../contexts/WhatToShow';
+import { Link } from 'react-router-dom';
 
 export default function TemporaryDrawer({open, toggleDrawer}) {
-  const {show, setShow} = useWhatToShow();
+  const {setShow} = useWhatToShow();
 
   const handleClick = (item) => {
     setShow(item.toLowerCase());
@@ -28,20 +29,22 @@ export default function TemporaryDrawer({open, toggleDrawer}) {
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {[{"text": 'Dashboard', "icon": <PersonalVideoIcon />}, {"text": 'Product Backlog', "icon": <MenuBookIcon />}, {"text": 'Epics', "icon": <FormatListNumberedIcon />}, {"text": 'Reports', "icon": <AssessmentIcon />}].map((item, index) => (
-          <ListItem key={item.text} disablePadding onClick={() => handleClick(item.text)}>
-            <ListItemButton>
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
+        {[{"text": 'dashboard', "icon": <PersonalVideoIcon />}, {"text": 'projects', "icon": <MenuBookIcon />}].map((item) => (
+          <Link to={"/"+item.text}>
+            <ListItem key={item.text} disablePadding onClick={() => handleClick(item.text)}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text.toUpperCase()} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
       <List>
-        {['Users'].map((text) => (
+        {['Profile'].map((text) => (
           <ListItem key={text} disablePadding onClick={() => handleClick("Users")}>
             <ListItemButton>
               <ListItemIcon>

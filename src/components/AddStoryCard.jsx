@@ -82,7 +82,6 @@ export default function AddStoryCard({ open, handleClose }) {
   }
 
   const hanleCreateUserStory = () => {
-    // Logic to create user story goes here
     createUserStroy(userStory).then((response) => {
       console.log("User story created:", response.data);
     });
